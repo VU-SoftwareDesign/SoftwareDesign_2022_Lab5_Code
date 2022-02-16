@@ -3,18 +3,19 @@ package softwaredesign.projectManager;
 import java.util.List;
 
 public class Manager extends Employee{
-    private List<Employee> subordinates;
+    private final List<Employee> subordinates;
 
-    public Manager(String name, double maxWorkHours, List<Skill> skills) {
+    public Manager(String name, double maxWorkHours, List<Skill> skills, List<Employee> subordinates) {
         super(name, maxWorkHours, skills);
+        this.subordinates = subordinates;
     }
 
     public List<Employee> getSubordinates() {
-        return subordinates;
+        return this.subordinates;
     }
 
-    public void setSubordinates(List<Employee> subordinates) {
-        this.subordinates = subordinates;
+    public Manager setSubordinates(List<Employee> subordinates) {
+        return new Manager(super.getName(), super.getHours(), super.getSkills(), subordinates);
     }
 
     @Override
