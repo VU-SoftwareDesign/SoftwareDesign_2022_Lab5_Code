@@ -53,7 +53,7 @@ public class test {
     List<Skill> skills = new ArrayList<>(createSkillList(skillNames));
     List<Employee> employees = new ArrayList<>(createEmployeeList(skills, employeeNames));
     List<Task> tasksList = new ArrayList<>(createTasks(employees, tasks, skills));
-    Manager manager = new Manager("mobam", 0d, skills).setSubordinates(employees);
+    Manager manager = new Manager("Dora", 0d, skills, employees);
 
 
    @Test
