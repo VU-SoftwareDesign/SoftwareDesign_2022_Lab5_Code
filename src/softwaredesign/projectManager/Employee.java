@@ -67,6 +67,13 @@ public abstract class Employee {
         return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy).copyAdditionalFields(this);
     }
 
+    /***
+     * Subclasses of Employee might have additional constructor fields / arguments that need to be copied, other than
+     * what the superclass knows about. This method lets each subclass define what needs to be copied over to new
+     * instances when a state-changing method is called on an immutable object.
+     * @param old   The old object (where the values should be copied FROM)
+     * @return      The new object (where the values were copied TO)
+     */
     protected abstract Employee copyAdditionalFields(Employee old);
 
 
