@@ -3,7 +3,7 @@ package softwaredesign.projectManager;
 import java.util.*;
 
 //Each task has to be assigned to atleast one employee. Map is a good option here.
-public class TaskList {
+public class TaskList implements Iterable<Task> {
     //can use map to with uuid .
 
     private final String name;
@@ -59,5 +59,10 @@ public class TaskList {
 
     public UUID getUuid() {
         return this.uuid;
+    }
+
+    @Override
+    public Iterator<Task> iterator() {
+        return this.tasks.values().iterator();
     }
 }
