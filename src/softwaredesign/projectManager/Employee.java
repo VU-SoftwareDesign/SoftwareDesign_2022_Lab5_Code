@@ -9,42 +9,33 @@ public abstract class Employee {
     private UUID uuid;
     private double workedHours;
     private List<Skill> skills;
+    protected EmployeeFactory.EmployeeType type;
 
     //Limit maxWorkHours to 40, add a boolean to ensure it does not top it.
 
-    public Employee(String name, double maxWorkHours, List<Skill> skills) {
+    public Employee(EmployeeFactory.EmployeeType type, String name, double maxWorkHours, List<Skill> skills) {
         this.name = name;
         this.workedHours = maxWorkHours;
         this.skills = skills;
         this.uuid = UUID.randomUUID();
+        this.type = type;
     }
 
     //Extra constructor
-    public Employee(String name) {
+    public Employee(EmployeeFactory.EmployeeType type, String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
         this.workedHours = 0D;
         this.skills = new ArrayList<>();
-    }
-
-    public void setName(String newName) {
-        this.name = newName;
+        this.type = type;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setHours(Double hours) {
-        this.workedHours = hours;
-    }
-
     public Double getHours() {
         return this.workedHours;
-    }
-
-    public void setSkills(List<Skill> newSkills) {
-        this.skills = new ArrayList<>(newSkills);
     }
 
     public List<Skill> getSkills() {
@@ -55,18 +46,30 @@ public abstract class Employee {
         return this.uuid;
     }
 
-    public void removeSkill(Skill skill) {
-        if (this.skills.contains(skill)) {
-            this.skills.remove(skill);
-        }
-        else {
-            System.out.println("Skill not found");
-        }
+    public Employee setName(String newName) {
+        return EmployeeFactory.getEmployee(type, newName, workedHours, skills, null, null);
     }
 
-    public void addSkill(Skill skill) {
-        this.skills.add(skill);
+    public Employee setHours(Double hours) {
+        return EmployeeFactory.getEmployee(type, name, hours, skills, null, null);
     }
+
+    public Employee setSkills(List<Skill> newSkills) {
+        return EmployeeFactory.getEmployee(type, name, workedHours, new ArrayList<>(newSkills), null, null);
+    }
+
+    public Employee removeSkill(Skill skill) {
+        ArrayList<Skill> skillsCopy = new ArrayList<>(this.getSkills());
+        skillsCopy.remove(skill);
+        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy, null, null);
+    }
+
+    public Employee addSkill(Skill skill) {
+        ArrayList<Skill> skillsCopy = new ArrayList<>(this.getSkills());
+        skillsCopy.add(skill);
+        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy, null, null);
+    }
+
 
     public String print () {
         String messageToBePrinted = "Employee name:" + this.name + "\nHours worked: " + this.workedHours + "\nSkills: ";
