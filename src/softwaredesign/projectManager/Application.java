@@ -6,13 +6,17 @@ import java.util.List;
 
 public class Application implements Iterable<Project> {
     private final List<Project> projects;
+    private static Application instance;
 
-    public Application() {
-        projects = new ArrayList<>();
+    public static Application getInstance() {
+        if (instance == null) {
+            instance = new Application();
+        }
+        return instance;
     }
 
-    public Application(List<Project> projects) {
-        this.projects = new ArrayList<>(projects);
+    private Application() {
+        projects = new ArrayList<>();
     }
 
     public void addProject(Project proj) {
