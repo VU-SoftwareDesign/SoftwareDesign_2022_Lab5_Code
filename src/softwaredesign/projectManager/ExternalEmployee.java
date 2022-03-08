@@ -1,38 +1,45 @@
 package softwaredesign.projectManager;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExternalEmployee extends Employee {
     private PaymentType paymentType;
     private double paymentSum;
 
-    private enum PaymentType {
+    public enum PaymentType {
         HOURLY,
         LUMP_SUM
     }
 
     public ExternalEmployee(String name, double maxWorkHours, List<Skill> skills, PaymentType paymentType, double paymentSum) {
-        super(name, maxWorkHours, skills);
+        super(EmployeeFactory.EmployeeType.External,name, maxWorkHours, skills);
         this.paymentType = paymentType;
         this.paymentSum = paymentSum;
     }
 
+    public ExternalEmployee(String name, double maxWorkHours, List<Skill> skills) {
+        super(EmployeeFactory.EmployeeType.External,name, maxWorkHours, skills);
+        this.paymentType = PaymentType.LUMP_SUM;
+        this.paymentSum = 0;
+    }
+
     public ExternalEmployee(String name) {
-        super(name);
+        super(EmployeeFactory.EmployeeType.External, name);
         this.paymentSum = 0;
         this.paymentType = PaymentType.LUMP_SUM;
     }
 
-    public void setPaymentType(PaymentType type) {
-        this.paymentType = type;
+    public Employee setPaymentType(PaymentType type) {
+        return new ExternalEmployee(getName(), getHours(), getSkills(), type, paymentSum);
     }
 
     public PaymentType getPaymentType(PaymentType type) {
         return this.paymentType;
     }
 
-    public void setPaymentSum(double sum) {
-        this.paymentSum = sum;
+    public Employee setPaymentSum(double sum) {
+        return new ExternalEmployee(getName(), getHours(), getSkills(), paymentType, sum);
     }
 
     public double getPaymentSum() {
