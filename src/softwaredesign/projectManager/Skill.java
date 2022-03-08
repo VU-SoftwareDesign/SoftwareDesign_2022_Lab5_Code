@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 final public class Skill {
-    //Be sure to mention the difference between this and status. (particularly the enumeration)
     private final String name;
     private static Map<String, Skill> instances;
 

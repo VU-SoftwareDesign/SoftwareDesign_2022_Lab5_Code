@@ -2,13 +2,9 @@ package softwaredesign.projectManager;
 
 import java.util.*;
 
-//Each task has to be assigned to atleast one employee. Map is a good option here.
 public class TaskList implements Iterable<Task> {
-    //can use map to with uuid .
 
     private final String name;
-
-    //Changed from list to task
     private final Map<UUID, Task> tasks;
 
     private final UUID uuid;

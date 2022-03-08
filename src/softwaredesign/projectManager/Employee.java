@@ -1,7 +1,7 @@
 package softwaredesign.projectManager;
 import java.util.*;
 import java.util.UUID;
-import java.util.ArrayList; // import the ArrayList class
+import java.util.ArrayList;
 
 public abstract class Employee {
 
@@ -11,8 +11,6 @@ public abstract class Employee {
     private List<Skill> skills;
     protected EmployeeFactory.EmployeeType type;
 
-    //Limit maxWorkHours to 40, add a boolean to ensure it does not top it.
-
     public Employee(EmployeeFactory.EmployeeType type, String name, double maxWorkHours, List<Skill> skills) {
         this.name = name;
         this.workedHours = maxWorkHours;
@@ -21,7 +19,6 @@ public abstract class Employee {
         this.type = type;
     }
 
-    //Extra constructor
     public Employee(EmployeeFactory.EmployeeType type, String name) {
         this.name = name;
         this.uuid = UUID.randomUUID();
