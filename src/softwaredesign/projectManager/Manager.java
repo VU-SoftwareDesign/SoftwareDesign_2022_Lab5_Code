@@ -2,7 +2,7 @@ package softwaredesign.projectManager;
 
 import java.util.List;
 
-public class Manager extends Employee{
+public class Manager extends InternalEmployee{
     private final List<Employee> subordinates;
 
     public Manager(String name, double maxWorkHours, List<Skill> skills, List<Employee> subordinates) {
