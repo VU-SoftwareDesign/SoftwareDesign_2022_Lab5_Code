@@ -6,6 +6,11 @@ import java.util.List;
 public class Manager extends InternalEmployee{
     private final List<Employee> subordinates;
 
+    public Manager(String name, double maxWorkHours, List<Skill> skills, List<Employee> subordinates) {
+        super(EmployeeFactory.EmployeeType.Manager, name, maxWorkHours, skills);
+        this.subordinates = new ArrayList<>(subordinates);
+    }
+
     public Manager(String name, double maxWorkHours, List<Skill> skills) {
         super(EmployeeFactory.EmployeeType.Manager, name, maxWorkHours, skills);
         this.subordinates = new ArrayList<>();
@@ -21,7 +26,13 @@ public class Manager extends InternalEmployee{
     }
 
     public Manager setSubordinates(List<Employee> subordinates) {
-        return new Manager(super.getName(), super.getHours(), super.getSkills());
+        return new Manager(super.getName(), super.getHours(), super.getSkills(), new ArrayList<>(subordinates));
+    }
+
+    @Override
+    protected Employee copyAdditionalFields(Employee old) {
+        Manager oldManager = (Manager) old;
+        return setSubordinates(oldManager.getSubordinates());
     }
 
     @Override

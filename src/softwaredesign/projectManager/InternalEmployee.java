@@ -19,4 +19,9 @@ public class InternalEmployee extends Employee{
     public InternalEmployee(EmployeeFactory.EmployeeType type, String name) {
         super(type, name);
     }
+
+    @Override
+    protected Employee copyAdditionalFields(Employee old) {
+        return old;
+    }
 }

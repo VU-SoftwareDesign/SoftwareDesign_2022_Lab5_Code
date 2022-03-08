@@ -7,6 +7,12 @@ public class ExternalEmployee extends Employee {
     private PaymentType paymentType;
     private double paymentSum;
 
+    @Override
+    protected Employee copyAdditionalFields(Employee old) {
+        ExternalEmployee oldExternal = (ExternalEmployee) old;
+        return setPaymentType(oldExternal.paymentType).setPaymentSum(oldExternal.paymentSum);
+    }
+
     public enum PaymentType {
         HOURLY,
         LUMP_SUM
@@ -30,15 +36,15 @@ public class ExternalEmployee extends Employee {
         this.paymentType = PaymentType.LUMP_SUM;
     }
 
-    public Employee setPaymentType(PaymentType type) {
+    public ExternalEmployee setPaymentType(PaymentType type) {
         return new ExternalEmployee(getName(), getHours(), getSkills(), type, paymentSum);
     }
 
-    public PaymentType getPaymentType(PaymentType type) {
+    public PaymentType getPaymentType() {
         return this.paymentType;
     }
 
-    public Employee setPaymentSum(double sum) {
+    public ExternalEmployee setPaymentSum(double sum) {
         return new ExternalEmployee(getName(), getHours(), getSkills(), paymentType, sum);
     }
 

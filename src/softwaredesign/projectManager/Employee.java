@@ -47,28 +47,30 @@ public abstract class Employee {
     }
 
     public Employee setName(String newName) {
-        return EmployeeFactory.getEmployee(type, newName, workedHours, skills, null, null);
+        return EmployeeFactory.getEmployee(type, newName, workedHours, skills).copyAdditionalFields(this);
     }
 
     public Employee setHours(Double hours) {
-        return EmployeeFactory.getEmployee(type, name, hours, skills, null, null);
+        return EmployeeFactory.getEmployee(type, name, hours, skills).copyAdditionalFields(this);
     }
 
     public Employee setSkills(List<Skill> newSkills) {
-        return EmployeeFactory.getEmployee(type, name, workedHours, new ArrayList<>(newSkills), null, null);
+        return EmployeeFactory.getEmployee(type, name, workedHours, new ArrayList<>(newSkills)).copyAdditionalFields(this);
     }
 
     public Employee removeSkill(Skill skill) {
         ArrayList<Skill> skillsCopy = new ArrayList<>(this.getSkills());
         skillsCopy.remove(skill);
-        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy, null, null);
+        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy).copyAdditionalFields(this);
     }
 
     public Employee addSkill(Skill skill) {
         ArrayList<Skill> skillsCopy = new ArrayList<>(this.getSkills());
         skillsCopy.add(skill);
-        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy, null, null);
+        return EmployeeFactory.getEmployee(type, name, workedHours, skillsCopy).copyAdditionalFields(this);
     }
+
+    protected abstract Employee copyAdditionalFields(Employee old);
 
 
     public String print () {

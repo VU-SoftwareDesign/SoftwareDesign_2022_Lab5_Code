@@ -10,8 +10,7 @@ public class EmployeeFactory {
         Manager
     }
 
-    public static Employee getEmployee(EmployeeType type, String name, Double maxWorkHours, List<Skill> skills,
-                                       ExternalEmployee.PaymentType paymentType, Double paymentSum) {
+    public static Employee getEmployee(EmployeeType type, String name, Double maxWorkHours, List<Skill> skills) {
         switch (type) {
             case Internal:
                 if (maxWorkHours != null && skills != null) {
