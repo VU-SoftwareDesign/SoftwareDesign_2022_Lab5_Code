@@ -24,7 +24,7 @@ public class test {
     public List<Employee> createEmployeeList (List<Skill> skills, String[] employeeNames) {
         List<Employee> employeesList = new ArrayList<>();
         for (String currentName : employeeNames) {
-            employeesList.add(new Employee(currentName, 0d,  skills));
+            employeesList.add(new InternalEmployee(currentName, 0d,  skills));
         }
         return employeesList;
     }
