@@ -16,7 +16,7 @@ public class test {
     public List<Skill> createSkillList (String[] skillNames) {
         List<Skill> skills = new ArrayList<>();
         for (String skill : skillNames) {
-            skills.add(new Skill(skill));
+            skills.add(Skill.getInstance(skill));
         }
         return skills;
     }
@@ -53,7 +53,7 @@ public class test {
     List<Skill> skills = new ArrayList<>(createSkillList(skillNames));
     List<Employee> employees = new ArrayList<>(createEmployeeList(skills, employeeNames));
     List<Task> tasksList = new ArrayList<>(createTasks(employees, tasks, skills));
-    Manager manager = new Manager("mobam", 0d, skills, employees);
+    Manager manager = new Manager("mobam", 0d, skills).setSubordinates(employees);
 
 
    @Test
