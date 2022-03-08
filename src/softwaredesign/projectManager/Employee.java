@@ -3,12 +3,12 @@ import java.util.*;
 import java.util.UUID;
 import java.util.ArrayList; // import the ArrayList class
 
-public class Employee {
+public abstract class Employee {
 
-    private final String name;
-    private final UUID uuid;
-    private final double workedHours;
-    private final List<Skill> skills;
+    private String name;
+    private UUID uuid;
+    private double workedHours;
+    private List<Skill> skills;
 
     //Limit maxWorkHours to 40, add a boolean to ensure it does not top it.
 
@@ -27,50 +27,45 @@ public class Employee {
         this.skills = new ArrayList<>();
     }
 
-    public Employee setName(String newName) {
-        return new Employee(newName, this.workedHours, this.skills);
+    public void setName(String newName) {
+        this.name = newName;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public Employee setHours(Double hours) {
-        return new Employee(this.name, hours, this.skills);
+    public void setHours(Double hours) {
+        this.workedHours = hours;
     }
 
     public Double getHours() {
         return this.workedHours;
     }
 
-    public Employee setSkills(List<Skill> newSkills) {
-        return new Employee(this.name, this.workedHours, newSkills);
+    public void setSkills(List<Skill> newSkills) {
+        this.skills = new ArrayList<>(newSkills);
     }
 
     public List<Skill> getSkills() {
-        return this.skills;
+        return new ArrayList<>(this.skills);
     }
 
     public UUID getUuid() {
         return this.uuid;
     }
 
-    public Employee removeSkill(Skill skill) {
-        List<Skill> updatedSkills = new ArrayList<> (skills);
-        for (Skill currentSkill : updatedSkills) {
-            if (currentSkill == skill) {
-                updatedSkills.remove(skill);
-            }
-            //Use catch
-            else System.out.println("Skill not found");
+    public void removeSkill(Skill skill) {
+        if (this.skills.contains(skill)) {
+            this.skills.remove(skill);
         }
-        return new Employee(this.name, this.workedHours, updatedSkills);
+        else {
+            System.out.println("Skill not found");
+        }
     }
 
-    public Employee addSkill(Skill skill) {
-        List<Skill> updatedSkills = new ArrayList<> (skills);
-        updatedSkills.add(skill);
-        return new Employee(this.name, this.workedHours, updatedSkills);
+    public void addSkill(Skill skill) {
+        this.skills.add(skill);
     }
 
     public String print () {
